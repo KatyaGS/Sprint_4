@@ -7,13 +7,13 @@ from selenium.webdriver.support import expected_conditions
 class PageQuestion:
     # опишем элементы на странице раздела "Вопросы о важном"
     # поле "вопросы о важном"
-    question_about_important = [By.XPATH, "/html/body/div/div/div/div[5]/div[1]"]
+    question_about_important = [By.XPATH, '//*[contains(@class, "Home_FourPart")]//*[contains (text(), "Вопросы о важном")]']
     # принять куки
     accept_cookies = [By.XPATH, '//*[@id="rcc-confirm-button"]']
     # Сколько это стоит? И как оплатить?
     how_much_cost = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[1]/div[1]/div",
+        '//*[@id="accordion__heading-0"]',
     ]
     # Хочу сразу несколько самокатов! Так можно?
     several_scooters = [By.XPATH, '//*[@id="accordion__heading-1"]']
@@ -33,42 +33,42 @@ class PageQuestion:
     # текст ответа на вопрос "Сколько это стоит? И как оплатить?"
     how_much_cost_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[1]/div[2]/p",
+        '//*[@id="accordion__panel-0"]/p',
     ]
     # текст ответа на вопрос "Хочу сразу несколько самокатов! Так можно?"
     several_scooters_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[2]/div[2]/p",
+        '//*[@id="accordion__panel-1"]/p',
     ]
     # текст ответа на вопрос "Как рассчитывается время аренды?"
     rental_time_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[3]/div[2]/p",
+        '//*[@id="accordion__panel-2"]/p',
     ]
     # текст ответа на вопрос "Можно ли заказать самокат прямо на сегодня?"
     order_scooter_today_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[4]/div[2]/p",
+        '//*[@id="accordion__panel-3"]/p',
     ]
     # текст ответа на вопрос "Можно ли продлить заказ или вернуть самокат раньше?"
     extend_return_scooter_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[5]/div[2]/p",
+        '//*[@id="accordion__panel-4"]/p',
     ]
     # текст ответа на вопрос "Вы привозите зарядку вместе с самокатом?"
     chargers_with_scooter_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[6]/div[2]/p",
+        '//*[@id="accordion__panel-5"]/p',
     ]
     # текст ответа на вопрос "Можно ли отменить заказ?"
     cancel_order_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[7]/div[2]/p",
+        '//*[@id="accordion__panel-6"]/p',
     ]
     # текст ответа на вопрос "Я жизу за МКАДом, привезёте?"
     live_outside_mkad_answer = [
         By.XPATH,
-        "/html/body/div/div/div/div[5]/div[2]/div/div[8]/div[2]/p",
+        '//*[@id="accordion__panel-7"]/p',
     ]
 
     # текста ответов на вопросы
@@ -80,7 +80,9 @@ class PageQuestion:
         "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010."
     )
     chargers_with_scooter_answer_text = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится."
-    cancel_order_answer_text = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."
+    cancel_order_answer_text = (
+        "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."
+    )
     live_outside_mkad_answer_text = "Да, обязательно. Всем самокатов! И Москве, и Московской области."
 
     # конструктор класса (смогу задать любой драйвер)

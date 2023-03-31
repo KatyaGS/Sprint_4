@@ -4,137 +4,85 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from pages.page_question import PageQuestion
+import pytest
 
 
 class TestPageQuestion:
-    driver = None
+    # 1. кнопка со стрелочкой
+    # 2. локатор атрибута aria-expanded
+    # 3. сравнить текст который показывается при открытии стрелочки с текстом который у нас уже есть
 
-    @classmethod
-    def setup_class(cls):
-        # создали драйвер для браузера Mozilla
-        cls.driver = webdriver.Firefox()
+    test_data_object = PageQuestion(None)
+    test_data_how_much_cost = [
+        test_data_object.how_much_cost,
+        test_data_object.how_much_cost_answer,
+        test_data_object.how_much_cost_answer_text,
+    ]
 
-        # перешли на страницу
-        cls.driver.get("https://qa-scooter.praktikum-services.ru/")
-        # создадим объект класса страницы
-        cls.questions = PageQuestion(cls.driver)
-        cls.driver.maximize_window()
+    test_data_several_scooters = [
+        test_data_object.several_scooters,
+        test_data_object.several_scooters_answer,
+        test_data_object.several_scooters_answer_text,
+    ]
 
-    @allure.title("Тест кнопки принятия cookies")
-    @allure.description('На главной странице нажать на кнопку "да все  привыкли"')
-    # ожидаем загрузки страницы и кликаем на куки
-    def test_accept_cookies(self):
-        self.questions.load_page()
+    test_data_rental_time = [
+        test_data_object.rental_time,
+        test_data_object.rental_time_answer,
+        test_data_object.rental_time_answer_text,
+    ]
 
-    @allure.title('Проверка поля "Сколько это стоит? И как оплатить?"')  # декоратор
+    test_data_order_scooter_today = [
+        test_data_object.order_scooter_today,
+        test_data_object.order_scooter_today_answer,
+        test_data_object.order_scooter_today_answer_text,
+    ]
+
+    test_data_extend_return_scooter = [
+        test_data_object.extend_return_scooter,
+        test_data_object.extend_return_scooter_answer,
+        test_data_object.extend_return_scooter_answer_text,
+    ]
+
+    test_data_chargers_with_scooter = [
+        test_data_object.chargers_with_scooter,
+        test_data_object.chargers_with_scooter_answer,
+        test_data_object.chargers_with_scooter_answer_text,
+    ]
+
+    test_data_cancel_order = [
+        test_data_object.cancel_order,
+        test_data_object.cancel_order_answer,
+        test_data_object.cancel_order_answer_text,
+    ]
+
+    test_data_live_outside_mkad = [
+        test_data_object.live_outside_mkad,
+        test_data_object.live_outside_mkad_answer,
+        test_data_object.live_outside_mkad_answer_text,
+    ]
+
+    test_data = [
+        test_data_how_much_cost,
+        test_data_several_scooters,
+        test_data_rental_time,
+        test_data_order_scooter_today,
+        test_data_extend_return_scooter,
+        test_data_chargers_with_scooter,
+        test_data_cancel_order,
+        test_data_live_outside_mkad,
+    ]
+
+    @allure.title("Проверка поля")
     @allure.description(
         "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
     )
-    # проверяем "Сколько это стоит? И как оплатить?"
-    def test_question_how_much_cost(self):
+    @pytest.mark.parametrize("locator,answer,answer_text", test_data)
+    def test_question(self, driver, locator, answer, answer_text):
+        questions = PageQuestion(driver)
+        questions.load_page()
         # кликаем на стрелочку
-        self.questions.click(self.questions.how_much_cost)
+        questions.click(locator)
         # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.how_much_cost) == "true"
+        assert questions.check_attribute(locator) == "true"
         # Проверяем текст ответа
-        assert self.questions.get_answer_text(self.questions.how_much_cost_answer) == self.questions.how_much_cost_answer_text
-
-    @allure.title('Проверка поля "Хочу сразу несколько самокатов! Так можно?"')  # декоратор
-    @allure.description(
-        "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
-    )
-    # проверяем "Хочу сразу несколько самокатов! Так можно?"
-    def test_question_several_scooters(self):
-        # кликаем на стрелочку
-        self.questions.click(self.questions.several_scooters)
-        # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.several_scooters) == "true"
-        # Проверяем текст ответа
-        assert self.questions.get_answer_text(self.questions.several_scooters_answer) == self.questions.several_scooters_answer_text
-
-    @allure.title('Проверка поля "Как рассчитывается время аренды?"')  # декоратор
-    @allure.description(
-        "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
-    )
-    # проверяем "Как рассчитывается время аренды?"
-    def test_question_rental_time(self):
-        # кликаем на стрелочку
-        self.questions.click(self.questions.rental_time)
-        # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.rental_time) == "true"
-        # Проверяем текст ответа
-        assert self.questions.get_answer_text(self.questions.rental_time_answer) == self.questions.rental_time_answer_text
-
-    @allure.title('Проверка поля "Можно ли заказать самокат прямо на сегодня?"')  # декоратор
-    @allure.description(
-        "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
-    )
-    # проверяем "Можно ли заказать самокат прямо на сегодня?"
-    def test_question_order_scooter_today(self):
-        # кликаем на стрелочку
-        self.questions.click(self.questions.order_scooter_today)
-        # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.order_scooter_today) == "true"
-        # Проверяем текст ответа
-        assert self.questions.get_answer_text(self.questions.order_scooter_today_answer) == self.questions.order_scooter_today_answer_text
-
-    @allure.title('Проверка поля "Можно ли продлить заказ или вернуть самокат раньше?"')  # декоратор
-    @allure.description(
-        "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
-    )
-    # проверяем "Можно ли продлить заказ или вернуть самокат раньше?"
-    def test_question_extend_return_scooter(self):
-        # кликаем на стрелочку
-        self.questions.click(self.questions.extend_return_scooter)
-        # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.extend_return_scooter) == "true"
-        # Проверяем текст ответа
-        assert (
-            self.questions.get_answer_text(self.questions.extend_return_scooter_answer) == self.questions.extend_return_scooter_answer_text
-        )
-
-    @allure.title('Проверка поля "Вы привозите зарядку вместе с самокатом?"')  # декоратор
-    @allure.description(
-        "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
-    )
-    # проверяем "Вы привозите зарядку вместе с самокатом?"
-    def test_question_chargers_with_scooter(self):
-        # кликаем на стрелочку
-        self.questions.click(self.questions.chargers_with_scooter)
-        # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.chargers_with_scooter) == "true"
-        # Проверяем текст ответа
-        assert (
-            self.questions.get_answer_text(self.questions.chargers_with_scooter_answer) == self.questions.chargers_with_scooter_answer_text
-        )
-
-    @allure.title('Проверка поля "Можно ли отменить заказ?"')  # декоратор
-    @allure.description(
-        "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
-    )
-    # проверяем "Можно ли отменить заказ?"
-    def test_question_cancel_order(self):
-        # кликаем на стрелочку
-        self.questions.click(self.questions.cancel_order)
-        # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.cancel_order) == "true"
-        # Проверяем текст ответа
-        assert self.questions.get_answer_text(self.questions.cancel_order_answer) == self.questions.cancel_order_answer_text
-
-    @allure.title('Проверка поля "Я жизу за МКАДом, привезёте?"')  # декоратор
-    @allure.description(
-        "На странице ищем элемент, кликаем на стрелочку и проверяем что он раскрылся и проверяем правильный ли у него текст"
-    )
-    # проверяем "Я жизу за МКАДом, привезёте?"
-    def test_question_live_outside_mkad(self):
-        # кликаем на стрелочку
-        self.questions.click(self.questions.live_outside_mkad)
-        # проверяем, что атрибут "aria-expanded" стал равен "true" после нажатия
-        assert self.questions.check_attribute(self.questions.live_outside_mkad) == "true"
-        # Проверяем текст ответа
-        assert self.questions.get_answer_text(self.questions.live_outside_mkad_answer) == self.questions.live_outside_mkad_answer_text
-
-    @classmethod
-    def teardown_class(cls):
-        # закрыли браузер
-        cls.driver.quit()
+        assert questions.get_answer_text(answer) == answer_text

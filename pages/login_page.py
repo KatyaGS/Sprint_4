@@ -6,67 +6,67 @@ from selenium.webdriver.support import expected_conditions
 
 class RegistrationPageScooter:
     # локатор кнопки "Заказать" вверху стр
-    order_up = [By.XPATH, "/html/body/div/div/div[1]/div[1]/div[2]/button[1]"]
+    order_up = [By.XPATH, '//*[contains(@class, "Header_Nav")]//*[contains(@class, "Button_Button")]']
     # локатор кнопки "Заказать" в середине стр
-    order_middle = [By.XPATH, "/html/body/div/div/div[1]/div[4]/div[2]/div[5]/button"]
+    order_middle = [By.XPATH, '//*[contains(@class, "Home_FinishButton")]//*[contains(@class, "Button_Button")]']
     # локатор поля "Имя"
-    first_name = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[1]/input"]
+    first_name = [By.XPATH, '//*[contains(@placeholder, "Имя")]']
     # локатор поля "Фамилия"
-    last_name = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[2]/input"]
+    last_name = [By.XPATH, '//*[contains(@placeholder, "Фамилия")]']
     # локатор поля "Адрес: куда привезти заказ"
-    address = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[3]/input"]
+    address = [By.XPATH, '//*[contains(@placeholder, "Адрес")]']
     # локатор поля "Станция метро"
-    subway = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[4]/div/div/input"]
+    subway = [By.XPATH, '//*[contains(@placeholder, "Станция метро")]']
     # локатор поля "Телефон: на него позвонит курьер"
-    mobile_phone = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[5]/input"]
+    mobile_phone = [By.XPATH, '//*[contains(@placeholder, "Телефон: на него позвонит курьер")]']
     # локатор кнопки "Далее" (на стр "Для кого самокат")
-    forward_button = [By.XPATH, "/html/body/div/div/div[2]/div[3]/button"]
+    forward_button = [By.XPATH, '//*[contains(@class, "Order_NextButton")]//*[contains(@class, "Button_Button")]']
     # локатор первого элемента в выпадающем списке станции метро (на стр "Для кого самокат")
     subway_menu_element = [
         By.XPATH,
-        "/html/body/div/div/div[2]/div[2]/div[4]/div/div[2]/ul/li[1]/button",
+        '//*[contains (text(), "Пражская")]',
     ]
     # локатор для кнопки подтверждения использования cookie
     cookie = [By.XPATH, '//*[@id="rcc-confirm-button"]']
     # локатор для поля "Когда привезти самокат" (на стр "Про аренду")
-    data_rent = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[1]/div[1]/div/input"]
+    data_rent = [By.XPATH, '//*[contains(@placeholder, "Когда привезти самокат")]']
     # локатор стрелочки вперед в календаре
     data_rent_next_month = [
         By.XPATH,
-        "/html/body/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/button[2]",
+        '//*[contains(@aria-label, "Next Month")]',
     ]
     # локатор даты
     data_rent_day = [
         By.XPATH,
-        "/html/body/div/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[2]/div[5]/div[6]",
+        '//*[contains(@aria-label, "30-е мая 2023")]',
     ]
     # локатор для поля "Срок аренды"
-    period_rent = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[2]/div[1]/div[1]"]
+    period_rent = [By.XPATH, '//*[contains(@class, "Dropdown-placeholder")]']
     # локатор срока на четверо суток
     period_rent_menu_element = [
         By.XPATH,
-        "/html/body/div/div/div[2]/div[2]/div[2]/div[2]/div[4]",
+        '//*[contains(text(), "четверо суток")]',
     ]
     # локатор для поля "Цвет самоката" (цвет:черный жемчуг)
     color_scooter_black = [By.XPATH, '//*[@id="black"]']
     # локатор для поля "Цвет самоката" (цвет:серая безысходность)
-    color_scooter_grey = [By.XPATH, '//*[@id="black"]']
+    color_scooter_grey = [By.XPATH, '//*[@id="grey"]']
     # локатор для поля "Комментарий для курьера"
-    comments = [By.XPATH, "/html/body/div/div/div[2]/div[2]/div[4]/input"]
+    comments = [By.XPATH, '//*[contains(@placeholder, "Комментарий для курьера")]']
     # локатор для кнопки "Заказать" (на стр "Про аренду")
-    order_button = [By.XPATH, "/html/body/div/div/div[2]/div[3]/button[2]"]
+    order_button = [By.XPATH, '//*[contains(@class, "Order_Buttons")]//*[contains (text(), "Заказать")]']
     # локатор для кнопки "Назад" (на стр "Про аренду")
-    back_button = [By.XPATH, "/html/body/div/div/div[2]/div[3]/button[1]"]
+    back_button = [By.XPATH, '//*[contains(@class, "Order_Buttons")]//*[contains (text(), "Назад")]']
     # локатор всплывающего окошка с кнопкой "Да"
-    pop_up_window_yes = [By.XPATH, "/html/body/div/div/div[2]/div[5]/div[2]/button[2]"]
+    pop_up_window_yes = [By.XPATH, '//*[contains(@class, "Order_Buttons")]//*[contains (text(), "Да")]']
     # локатор всплывающего окошка с кнопкой "Нет"
-    pop_up_window_no = [By.XPATH, "/html/body/div/div/div[2]/div[5]/div[2]/button[1]"]
+    pop_up_window_no = [By.XPATH, '//*[contains(@class, "Order_Buttons")]//*[contains (text(), "Нет")]']
     # локатор текста в сплывающем окошке "Заказ оформлен"
-    order_processed = [By.XPATH, "/html/body/div/div/div[2]/div[5]/div[1]"]
+    order_processed = [By.XPATH, '//*[contains(@class, "Order_Modal")]//*[contains (@class, "Order_ModalHeader")]']
     # локатор кнопки "Посмотреть статус"
-    status = [By.XPATH, "/html/body/div/div/div[2]/div[5]/div[2]/button"]
+    status = [By.XPATH, '//*[contains(@class, "Order_NextButton")]//*[contains (@class, "Button_Button")]']
     # локатор логотипа "Самокат"
-    logo_scooter = [By.XPATH, "/html/body/div/div/div[1]/div[1]/a[2]/img"]
+    logo_scooter = [By.XPATH, '//*[contains(@class, "Header_LogoScooter")]']
 
     # конструктор класса (смогу задать любой драйвер)
     def __init__(self, driver):
@@ -87,7 +87,8 @@ class RegistrationPageScooter:
     # метод заполняет поле "Станция метро"
     # сначала найти поле
     def set_subway(self, test_subway):
-        self.driver.find_element(*self.subway).send_keys(test_subway)
+        # self.driver.find_element(*self.subway).send_keys(test_subway)
+        self.driver.find_element(*self.subway).click()
 
     def select_subway(self):
         self.driver.find_element(*self.subway_menu_element).click()
@@ -96,15 +97,11 @@ class RegistrationPageScooter:
     def set_mobile_phone(self, test_mobile_phone):
         self.driver.find_element(*self.mobile_phone).send_keys(test_mobile_phone)
 
-    # метод проверяет активна ли кнопка "Заказать" вверху стр
-    def click_order_up(self):
-        self.driver.find_element(*self.order_up).click()
+    # метод нажимает кнопку "Заказать"
+    def click_order(self, test_order_button):
+        self.driver.find_element(*test_order_button).click()
 
-    # метод проверяет активна ли кнопка "Заказать" внизу стр
-    def click_order_middle(self):
-        self.driver.find_element(*self.order_middle).click()
-
-    # метод проверяет активна ли кнопка "Далее" (после ввода данных в регистрации, на стр "Для кого самокат")
+    # метод нажимает кнопку "Далее" (после ввода данных в регистрации, на стр "Для кого самокат")
     def click_forward_button(self):
         self.driver.find_element(*self.forward_button).click()
 
@@ -112,7 +109,7 @@ class RegistrationPageScooter:
     def click_cookie(self):
         self.driver.find_element(*self.cookie).click()
 
-    # метод заполняет поле "Когда привезти самокат"
+    # метод нажимает на поле "Когда привезти самокат"
     # сначала найти поле
     def set_data_rent(self):
         self.driver.find_element(*self.data_rent).click()
@@ -123,14 +120,14 @@ class RegistrationPageScooter:
     def select_data_rent_day(self):
         self.driver.find_element(*self.data_rent_day).click()
 
-    # метод заполняет поле "Срок аренды"
+    # метод нажимает на поле "Срок аренды"
     def set_period_rent(self):
         self.driver.find_element(*self.period_rent).click()
 
     def select_period_rent(self):
         self.driver.find_element(*self.period_rent_menu_element).click()
 
-    # метод заполняет поле "Цвет самоката"
+    # метод нажимает на поле "Цвет самоката"
     def set_color_scooter_black(self):
         self.driver.find_element(*self.color_scooter_black).click()
 
@@ -142,7 +139,7 @@ class RegistrationPageScooter:
     def click_order_button(self):
         self.driver.find_element(*self.order_button).click()
 
-    # метод нажимает на кнопку "Да" (в сплывающем окне "Хотите оформить заказ?")
+    # метод нажимает на кнопку "Да" (в всплывающем окне "Хотите оформить заказ?")
     def click_pop_up_window_yes(self):
         self.driver.find_element(*self.pop_up_window_yes).click()
 
@@ -170,11 +167,11 @@ class RegistrationPageScooter:
         assert "Заказ оформлен" in result
 
     # объединить методы для заполнения страницы "Для кого самокат"
-    def create_order(self, test_name, test_last_name, test_address, test_subway, test_mobile_phone):
+    def create_order(self, test_name, test_last_name, test_address, test_subway, test_mobile_phone, order_button):
         # дождёмся загрузки страницы
         self.wait_for_load_registration_page()
         # кликнуть на кнопку "Заказать"
-        self.click_order_up()
+        self.click_order(order_button)
         # ввести имя
         self.set_first_name(test_name)
         # ввести фамилию
@@ -208,7 +205,7 @@ class RegistrationPageScooter:
         self.select_data_rent_day()
         # кликнуть на кнопку "Заказать" (на стр Про аренду)
         self.click_order_button()
-        # кликнуть на кнопку "Да" в сплывающем окне "Хотите оформить заказ?"
+        # кликнуть на кнопку "Да" в всплывающем окне "Хотите оформить заказ?"
         self.click_pop_up_window_yes()
         # проверка что заказ оформился
         self.check_order()
